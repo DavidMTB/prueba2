@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const API_URL = 'http://localhost:3000/api/cart';
 
 export const addToCart = async (
@@ -7,16 +5,18 @@ export const addToCart = async (
   producto_id: number,
   cantidad: number
 ) => {
-  const res = await axios.post(`${API_URL}/add`, {
-    usuario_id,
-    producto_id,
-    cantidad
+  const res = await fetch(`${API_URL}/add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ usuario_id, producto_id, cantidad })
   });
 
-  return res.data;
+  return res.json();
 };
 
 export const getCart = async (usuario_id: number) => {
-  const res = await axios.get(`${API_URL}/${usuario_id}`);
-  return res.data;
+  const res = await fetch(`${API_URL}/${usuario_id}`);
+  return res.json();
 };

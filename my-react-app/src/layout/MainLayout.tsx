@@ -1,5 +1,5 @@
-import Header from '../components/Header';
 import type { ReactNode } from 'react';
+import Header from '../components/Header';
 
 interface Props {
   children: ReactNode;
@@ -8,11 +8,10 @@ interface Props {
 const MainLayout = ({ children }: Props) => {
   return (
     <>
-      <Header
-        onSearch={() => {}}
-        onCategoria={() => {}}
-      />
-      <main style={{ padding: 20 }}>{children}</main>
+      <Header />
+      <main style={{ padding: 20 }}>
+        {children}
+      </main>
     </>
   );
 };

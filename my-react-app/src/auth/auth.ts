@@ -1,27 +1,14 @@
-export interface AuthUser {
-  id: number;
-  usuario: string;
-  rol: 'admin' | 'user';
-}
+export const auth = {
+  isAuthenticated: false,
+  role: null as 'admin' | 'user' | null,
 
-class Auth {
-  private user: AuthUser | null = null;
-
-  login(user: AuthUser) {
-    this.user = user;
-  }
+  login(role: 'admin' | 'user') {
+    this.isAuthenticated = true;
+    this.role = role;
+  },
 
   logout() {
-    this.user = null;
+    this.isAuthenticated = false;
+    this.role = null;
   }
-
-  isAuthenticated(): boolean {
-    return this.user !== null;
-  }
-
-  getUser(): AuthUser | null {
-    return this.user;
-  }
-}
-
-export const auth = new Auth();
+};

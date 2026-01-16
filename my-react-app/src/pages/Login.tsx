@@ -1,51 +1,24 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginService } from '../services/auth.service';
-import { auth } from '../auth/auth';
+interface User {
+  id: number;
+  usuario: string;
+}
 
-const Login = () => {
-  const [usuario, setUsuario] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+export const auth = {
+  user: null as User | null,
 
-  const login = async (e: React.FormEvent) => {
-    e.preventDefault();
+  login(user: User) {
+    this.user = user;
+  },
 
-    const data = await loginService(usuario, password);
+  logout() {
+    this.user = null;
+  },
 
-    if (data.ok === 1) {
-      auth.login({
-        id: data.usuario_id,
-        usuario: usuario,
-        rol: data.usuario === 'admin' ? 'admin' : 'user'
-      });
+  getUser() {
+    return this.user;
+  },
 
-      navigate('/');
-    } else {
-      alert(data.mensaje);
-    }
-  };
-
-  return (
-    <form onSubmit={login}>
-      <h2>Login</h2>
-
-      <input
-        placeholder="Usuario"
-        value={usuario}
-        onChange={(e) => setUsuario(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      <button type="submit">Ingresar</button>
-    </form>
-  );
+  isAuthenticated() {
+    return this.user !== null;
+  }
 };
-
-export default Login;

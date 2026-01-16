@@ -5,7 +5,6 @@ import Cart from '../pages/Cart';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 
-import AdminDashboard from '../pages/AdminVentas';
 import AdminVentas from '../pages/AdminVentas';
 
 import ProtectedRoute from './ProtectedRoute';
@@ -26,7 +25,7 @@ const AppRouter = () => {
           path="/admin"
           element={
             <ProtectedRoute>
-              <AdminDashboard />
+              <AdminVentas />
             </ProtectedRoute>
           }
         />

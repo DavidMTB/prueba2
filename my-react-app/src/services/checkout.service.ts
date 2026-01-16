@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/checkout';
-
-export const confirmarCompra = async () => {
-  const response = await axios.post(`${API_URL}/confirmar`);
-  return response.data;
+export const confirmarCompra = async (usuario_id: number) => {
+  const res = await axios.post('http://localhost:3000/api/checkout', {
+    usuario_id
+  });
+  return res.data;
 };
